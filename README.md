@@ -34,4 +34,67 @@
   chown bareos:bareos /var/spool/bareos/bareos-zabbix.bash
   chmod 700 /var/spool/bareos/bareos-zabbix.bash
   ```
-3. Скопировать из репозитория файлы `bareos.pl` и `bareos_hosts.pl` в папку со скриптами для агента Zabbix
+3. Оредактировать секцию `Messages` в `/etc/bareos/bareos-dir.conf`, добавив следующее:
+
+  ```
+  Messages {
+    ...
+    mailcommand = "/var/spool/bareos/bareos-zabbix.bash %i"
+    mail = 127.0.0.1 = all, !skipped
+    ...
+  }
+  ```
+таким образом после каждого задания будет вызываться bash скрипт в котроый будет передваться ID задания.
+
+4. Скопировать из репозитория файлы `bareos.pl` и `bareos_hosts.pl` в папку со скриптами для агента Zabbix, В моем случае это: `/etc/zabbix/scripts/`, и установить права:
+
+  ```
+  chown zabbix:zabbix /etc/zabbix/scripts/bareos.pl
+  chown zabbix:zabbix /etc/zabbix/scripts/bareos_hosts.pl
+  chmod 700 /etc/zabbix/scripts/bareos.pl
+  chmod 700 /etc/zabbix/scripts/bareos_hosts.pl  
+  ```
+  
+5. Отредактировать конфигурационный файл Zabbix агента `/etc/zabbix/zabbix-agentd.conf`, добавив следующее:
+  
+  ```
+  UserParameter=bareos.jobs[*],/usr/bin/perl /etc/zabbix/scripts/bareos.pl $1                                       
+  UserParameter=bareos.hosts,/usr/bin/perl /etc/zabbix/scripts/bareos_hosts.pl
+  ```
+6. Перезаргузить настройки Bareos Director, для этого сделать следующее:
+
+  ```
+    /etc/init.d/bacula-dir restart
+  ```
+  или 
+  ```
+    bconsole
+    reload
+    exit
+  ```
+7. Перезапустить zabbix-agent:
+
+  ```
+  /etc/init.d/zabbix-agentd restart
+  ```
+8. Импортировать в Zabbix шаблоны `bareos-template.xml`.
+9. В Zabbix подключить шаблон *Template Bareos Сlients* к хосту для которого правился конфиг агента.
+10. В Zabbix подключить шаблон *Template Bareos Processes* к хоста для которых нужно мониторить сотояние процессов.
+
+### Ссылки
+
+- **Bareos**:
+  - http://doc.bareos.org/master/html/bareos-manual-main-reference.html
+- **Zabbix**:
+  - https://www.zabbix.com/documentation/2.4/start
+
+
+### Feedback
+
+Вопросы, замечания и предложения:
+
+- https://github.com/ssv1982/bacula-zabbix/issues
+
+### P.S.
+Создано на основе:
+    https://github.com/germanodlf/bacula-zabbix.git
