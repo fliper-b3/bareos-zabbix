@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Bareos-zabbix by ssv1982</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Bareos-zabbix</h1>
+      <h2 class="project-tagline">Scripts and templates to monitor backup jobs from Bareos in Zabbix.</h2>
+      <a href="https://github.com/ssv1982/bareos-zabbix" class="btn">View on GitHub</a>
+      <a href="https://github.com/ssv1982/bareos-zabbix/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ssv1982/bareos-zabbix/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="zabbix-monitoring-of-bareoss-backup-jobs-and-its-processes" class="anchor" href="#zabbix-monitoring-of-bareoss-backup-jobs-and-its-processes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zabbix monitoring of Bareos's backup jobs and its processes</h1>
+
+<p>Мониторинг заданий Bareos производится посредством bash скриптов и perl скриптов. Perl скрипты используются в шаблонах Zabbix для низкоуровнего определия клиентов и списка заданий. мониторинг производится по каждому клиенту в разрезе каждого задания по уровням архивирования. Bash скрипты собирают информацию о выполненном задании из Bareos Catalog и передают в Zabbix. Создавалось и тестировалось на Bareos 15.2.0, Zabbix 2.4.5, Postgresql 9.4.3, в Calculate Linux.</p>
+
+<h2>
+<a id="Основные-возможности" class="anchor" href="#%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Основные возможности</h2>
+
+<ul>
+<li>Низкоуровневое определение клиентов Bareos в Zabbix;</li>
+<li>низкоуровневое определения заданий по клиентам Bareos в Zabbix;</li>
+<li>раздельный учет каждого клиента Bareos в Zabbix;</li>
+<li>раздельный учет каждого задания архивирования Bareos в Zabbix;</li>
+<li>раздельный учет каждого уровня архивирования Bareos в Zabbix.</li>
+</ul>
+
+<h2>
+<a id="Особенности" class="anchor" href="#%D0%9E%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Особенности</h2>
+
+<h3>
+<a id="Собираемые-данные" class="anchor" href="#%D0%A1%D0%BE%D0%B1%D0%B8%D1%80%D0%B0%D0%B5%D0%BC%D1%8B%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Собираемые данные</h3>
+
+<ul>
+<li>статус завершения задания;</li>
+<li>объем каждого задания;</li>
+<li>количество файлов в задании;</li>
+<li>время выполения задания;</li>
+<li>скорость выполнения задания.</li>
+</ul>
+
+<h2>
+<a id="Состав" class="anchor" href="#%D0%A1%D0%BE%D1%81%D1%82%D0%B0%D0%B2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Состав</h2>
+
+<h3>
+<a id="Шаблоны-zabbix" class="anchor" href="#%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B-zabbix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Шаблоны Zabbix</h3>
+
+<ul>
+<li>
+<em>Template Bareos Сlients</em> - шаблон для определения списка клиентов Bareos и создания хостов на Zabbix;</li>
+<li>
+<em>Template Bareos Processes</em> - шаблон для мониторинга состояния процессов Bareos;</li>
+<li>
+<em>Template Bareos</em> - шаблон для определения списка заданий по клиентам Bareos и создание элеменов в Zabbix хостах.</li>
+</ul>
+
+<h3>
+<a id="Скрипты" class="anchor" href="#%D0%A1%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>Скрипты</h3>
+
+<ul>
+<li>
+<em>bareos-zabbix.bash</em> - сбор данных из задания и отправка в Zabbix</li>
+<li>
+<em>bareos.pl</em> - скрипт для пользовательских параметров Zabbix агента, для создания элементов заданий в хостах Zabbix</li>
+<li>
+<em>bareos_hosts.pl</em> -скрипт для пользовательских параметров Zabbix агента, для создания хостов Zabbix</li>
+</ul>
+
+<h2>
+<a id="Установка" class="anchor" href="#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>Установка</h2>
+
+<ol>
+<li>
+<p>Создать файлonf
+chmod 640 /etc/bareos/bareos-zabbix.conf <code>/etc/bareos/bareos-zabbix.conf</code>,как в примере репозитория, отредактировать в соответствии со своими реалиями и установить права:</p>
+
+<pre><code>  chown root:bareos /etc/bareos/bareos-zabbix.c
+</code></pre>
+</li>
+<li>
+<p>Создать файл <code>/var/spool/bareos/bareos-zabbix.bash</code> копирование его из репозитория и установить права:</p>
+
+<pre><code>chown bareos:bareos /var/spool/bareos/bareos-zabbix.bash
+chmod 700 /var/spool/bareos/bareos-zabbix.bash
+</code></pre>
+</li>
+<li>
+<p>Оредактировать секцию <code>Messages</code> в <code>/etc/bareos/bareos-dir.conf</code>, добавив следующее:</p>
+
+<pre><code>Messages {
+  ...
+  mailcommand = "/var/spool/bareos/bareos-zabbix.bash %i"
+  mail = 127.0.0.1 = all, !skipped
+  ...
+}
+</code></pre>
+
+<p>таким образом после каждого задания будет вызываться bash скрипт в котроый будет передваться ID задания.</p>
+</li>
+<li>
+<p>Скопировать из репозитория файлы <code>bareos.pl</code> и <code>bareos_hosts.pl</code> в папку со скриптами для агента Zabbix, В моем случае это: <code>/etc/zabbix/scripts/</code>, и установить права:</p>
+
+<pre><code>chown zabbix:zabbix /etc/zabbix/scripts/bareos.pl
+chown zabbix:zabbix /etc/zabbix/scripts/bareos_hosts.pl
+chmod 700 /etc/zabbix/scripts/bareos.pl
+chmod 700 /etc/zabbix/scripts/bareos_hosts.pl  
+</code></pre>
+</li>
+<li>
+<p>Отредактировать конфигурационный файл Zabbix агента <code>/etc/zabbix/zabbix-agentd.conf</code>, добавив следующее:</p>
+
+<pre><code>UserParameter=bareos.jobs[*],/usr/bin/perl /etc/zabbix/scripts/bareos.pl $1                                       
+UserParameter=bareos.hosts,/usr/bin/perl /etc/zabbix/scripts/bareos_hosts.pl
+</code></pre>
+</li>
+<li>
+<p>Перезаргузить настройки Bareos Director, для этого сделать следующее:</p>
+
+<pre><code>  /etc/init.d/bacula-dir restart
+</code></pre>
+
+<p>или </p>
+
+<pre><code>  bconsole
+  reload
+  exit
+</code></pre>
+</li>
+<li>
+<p>Перезапустить zabbix-agent:</p>
+
+<pre><code>/etc/init.d/zabbix-agentd restart
+</code></pre>
+</li>
+<li>Импортировать в Zabbix шаблоны <code>bareos-template.xml</code>.</li>
+<li>В Zabbix подключить шаблон <em>Template Bareos Сlients</em> к хосту для которого правился конфиг агента.</li>
+<li>В Zabbix подключить шаблон <em>Template Bareos Processes</em> к хоста для которых нужно мониторить сотояние процессов.</li>
+</ol>
+
+<h2>
+<a id="Ссылки" class="anchor" href="#%D0%A1%D1%81%D1%8B%D0%BB%D0%BA%D0%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ссылки</h2>
+
+<ul>
+<li>
+<strong>Bareos</strong>:
+
+<ul>
+<li><a href="http://doc.bareos.org/master/html/bareos-manual-main-reference.html">http://doc.bareos.org/master/html/bareos-manual-main-reference.html</a></li>
+</ul>
+</li>
+<li>
+<strong>Zabbix</strong>:
+
+<ul>
+<li><a href="https://www.zabbix.com/documentation/2.4/start">https://www.zabbix.com/documentation/2.4/start</a></li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h2>
+
+<p>Вопросы, замечания и предложения:</p>
+
+<ul>
+<li><a href="https://github.com/ssv1982/bacula-zabbix/issues">https://github.com/ssv1982/bacula-zabbix/issues</a></li>
+</ul>
+
+<h2>
+<a id="ps" class="anchor" href="#ps" aria-hidden="true"><span class="octicon octicon-link"></span></a>P.S.</h2>
+
+<p>Создано на основе:
+    <a href="https://github.com/germanodlf/bacula-zabbix.git">https://github.com/germanodlf/bacula-zabbix.git</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ssv1982/bareos-zabbix">Bareos-zabbix</a> is maintained by <a href="https://github.com/ssv1982">ssv1982</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
