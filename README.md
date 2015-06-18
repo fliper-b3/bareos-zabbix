@@ -17,6 +17,21 @@
 - скорость выполнения задания.
 
 ###Шаблоны Zabbix
-- Template Bacula Сlients - шаблон для определения списка клиентов Bareos и создания хостов на Zabbix;
-- Template Bacula Processes - шаблон для мониторинга состояния процессов Bareos;
-- Template Bacula - шаблон для опрделения списка заданий по клиентам Bareos и создание элеменов в Zabbix хостах.
+- *Template Bareos Сlients* - шаблон для определения списка клиентов Bareos и создания хостов на Zabbix;
+- *Template Bareos Processes* - шаблон для мониторинга состояния процессов Bareos;
+- *Template Bareos* - шаблон для определения списка заданий по клиентам Bareos и создание элеменов в Zabbix хостах.
+
+##Установка
+
+1. Создать файлonf
+    chmod 640 /etc/bareos/bareos-zabbix.conf `/etc/bareos/bareos-zabbix.conf`,как в примере репозитория, отредактировать в соответствии со своими реалиями и установить права:
+  ```
+    chown root:bareos /etc/bareos/bareos-zabbix.c
+  ```
+
+2. Создать файл `/var/spool/bareos/bareos-zabbix.bash` копирование его из репозитория и установить права:
+  ```
+  chown bareos:bareos /var/spool/bareos/bareos-zabbix.bash
+  chmod 700 /var/spool/bareos/bareos-zabbix.bash
+  ```
+3. Скопировать из репозитория файлы `bareos.pl` и `bareos_hosts.pl` в папку со скриптами для агента Zabbix
