@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-06-18T09:15:36Z</date>
+    <date>2015-06-18T17:23:27Z</date>
     <groups>
         <group>
-            <name>bareos</name>
+            <name>Bareos</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>Template bareos</template>
-            <name>Template bareos</name>
+            <template>Template Bareos</template>
+            <name>Template Bareos</name>
             <description/>
             <groups>
                 <group>
-                    <name>bareos</name>
+                    <name>Bareos</name>
                 </group>
             </groups>
             <applications>
@@ -835,7 +835,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template bareos:bareos.diff.job.status[{#JOBNAME}].last()}&gt;1</expression>
+                            <expression>{Template Bareos:bareos.diff.job.status[{#JOBNAME}].last()}&gt;1</expression>
                             <name>Backup Differential Job {#JOBNAME} on {#CLIENTNAME} FAIL</name>
                             <url/>
                             <status>0</status>
@@ -844,7 +844,7 @@
                             <type>0</type>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template bareos:bareos.full.job.status[{#JOBNAME}].last()}&gt;1</expression>
+                            <expression>{Template Bareos:bareos.full.job.status[{#JOBNAME}].last()}&gt;1</expression>
                             <name>Backup Full Job {#JOBNAME} on {#CLIENTNAME} FAIL</name>
                             <url/>
                             <status>0</status>
@@ -853,7 +853,7 @@
                             <type>0</type>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template bareos:bareos.incr.job.status[{#JOBNAME}].last()}&gt;1</expression>
+                            <expression>{Template Bareos:bareos.incr.job.status[{#JOBNAME}].last()}&gt;1</expression>
                             <name>Backup Incremental Job {#JOBNAME} on {#CLIENTNAME} FAIL</name>
                             <url/>
                             <status>0</status>
@@ -889,7 +889,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.incr.job.status[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -901,7 +901,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.diff.job.bytes[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -933,7 +933,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.diff.job.speed[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -965,7 +965,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.full.job.bytes[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -997,7 +997,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.full.job.speed[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -1029,7 +1029,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.incr.job.bytes[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -1041,7 +1041,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.incr.job.status[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -1073,7 +1073,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Template bareos</host>
+                                        <host>Template Bareos</host>
                                         <key>bareos.incr.job.speed[{#JOBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -1101,12 +1101,12 @@
             <screens/>
         </template>
         <template>
-            <template>Template bareos Clients</template>
-            <name>Template bareos Clients</name>
+            <template>Template Bareos Clients</template>
+            <name>Template Bareos Clients</name>
             <description/>
             <groups>
                 <group>
-                    <name>bareos</name>
+                    <name>Bareos</name>
                 </group>
             </groups>
             <applications/>
@@ -1155,14 +1155,14 @@
                             <group_links>
                                 <group_link>
                                     <group>
-                                        <name>bareos</name>
+                                        <name>Bareos</name>
                                     </group>
                                 </group_link>
                             </group_links>
                             <group_prototypes/>
                             <templates>
                                 <template>
-                                    <name>Template bareos</name>
+                                    <name>Template Bareos</name>
                                 </template>
                             </templates>
                         </host_prototype>
@@ -1186,10 +1186,167 @@
             <templates/>
             <screens/>
         </template>
+        <template>
+            <template>Template Bareos Proceses</template>
+            <name>Template Bareos Proceses</name>
+            <description/>
+            <groups>
+                <group>
+                    <name>Bareos</name>
+                </group>
+            </groups>
+            <applications/>
+            <items>
+                <item>
+                    <name>Bareos Director is running</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[{$BAREOS.DIR}]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Bareos File is running</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[{$BAREOS.FD}]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Bareos Storage is running</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[{$BAREOS.SD}]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <macros>
+                <macro>
+                    <macro>{$BAREOS.DIR}</macro>
+                    <value>bareos-dir</value>
+                </macro>
+                <macro>
+                    <macro>{$BAREOS.FD}</macro>
+                    <value>bareos-fd</value>
+                </macro>
+                <macro>
+                    <macro>{$BAREOS.SD}</macro>
+                    <value>bareos-sd</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template bareos:proc.num[{$BAREOS.DIR}].last()}=0</expression>
+            <expression>{Template Bareos Proceses:proc.num[{$BAREOS.DIR}].last()}=0</expression>
+            <name>Bareos Director is DOWN in {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>5</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template Bareos:proc.num[{$BAREOS.DIR}].last()}=0</expression>
             <name>bareos Director is DOWN in {HOST.NAME}</name>
             <url/>
             <status>0</status>
@@ -1199,7 +1356,17 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>{Template bareos:proc.num[{$BAREOS.FD}].last()}=0</expression>
+            <expression>{Template Bareos Proceses:proc.num[{$BAREOS.FD}].last()}=0</expression>
+            <name>Bareos File is DOWN in {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template Bareos:proc.num[{$BAREOS.FD}].last()}=0</expression>
             <name>bareos File is DOWN in {HOST.NAME}</name>
             <url/>
             <status>0</status>
@@ -1209,7 +1376,17 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>{Template bareos:proc.num[{$BAREOS.SD}].last()}=0</expression>
+            <expression>{Template Bareos Proceses:proc.num[{$BAREOS.SD}].last()}=0</expression>
+            <name>Bareos Storage is DOWN in {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>5</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Template Bareos:proc.num[{$BAREOS.SD}].last()}=0</expression>
             <name>bareos Storage is DOWN in {HOST.NAME}</name>
             <url/>
             <status>0</status>
