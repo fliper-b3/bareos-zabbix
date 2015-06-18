@@ -16,10 +16,18 @@
 - время выполения задания;
 - скорость выполнения задания.
 
+##Состав
+
 ###Шаблоны Zabbix
 - *Template Bareos Сlients* - шаблон для определения списка клиентов Bareos и создания хостов на Zabbix;
 - *Template Bareos Processes* - шаблон для мониторинга состояния процессов Bareos;
 - *Template Bareos* - шаблон для определения списка заданий по клиентам Bareos и создание элеменов в Zabbix хостах.
+
+###Скрипты
+- *bareos-zabbix.bash* - сбор данных из задания и отправка в Zabbix
+- *bareos.pl* - скрипт для пользовательских параметров Zabbix агента, для создания элементов заданий в хостах Zabbix
+- *bareos_hosts.pl* -скрипт для пользовательских параметров Zabbix агента, для создания хостов Zabbix
+
 
 ##Установка
 
@@ -81,7 +89,7 @@
 9. В Zabbix подключить шаблон *Template Bareos Сlients* к хосту для которого правился конфиг агента.
 10. В Zabbix подключить шаблон *Template Bareos Processes* к хоста для которых нужно мониторить сотояние процессов.
 
-### Ссылки
+## Ссылки
 
 - **Bareos**:
   - http://doc.bareos.org/master/html/bareos-manual-main-reference.html
@@ -89,12 +97,12 @@
   - https://www.zabbix.com/documentation/2.4/start
 
 
-### Feedback
+## Feedback
 
 Вопросы, замечания и предложения:
 
 - https://github.com/ssv1982/bacula-zabbix/issues
 
-### P.S.
+## P.S.
 Создано на основе:
     https://github.com/germanodlf/bacula-zabbix.git
