@@ -34,7 +34,7 @@
 1. Создать файлonf
     chmod 640 /etc/bareos/bareos-zabbix.conf `/etc/bareos/bareos-zabbix.conf`,как в примере репозитория, отредактировать в соответствии со своими реалиями и установить права:
   ```
-    chown root:bareos /etc/bareos/bareos-zabbix.c
+    chown root:bareos /etc/bareos/bareos-zabbix.conf
   ```
 
 2. Создать файл `/var/spool/bareos/bareos-zabbix.bash` копирование его из репозитория и установить права:
