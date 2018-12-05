@@ -12,7 +12,7 @@ if [ ! -x $zabbixSender ] ; then exit 5 ; fi
 
 # Chose which database command to use
 case $bareosDbSgdb in
-  P) sql="/usr/bin/psql -h$bareosDbAddr -p$bareosDbPort -U$bareosDbUser -d$bareosDbName -tA -c" ;;
+  P) sql="/usr/bin/psql -h$bareosDbAddr -p$bareosDbPort -U$bareosDbUser -d$bareosDbName -tA -w -c" ;;
   M) sql="/usr/bin/mysql -NB -h$bareosDbAddr -P$bareosDbPort -u$bareosDbUser -p$bareosDbPass -D$bareosDbName -e" ;;
   *) exit 7 ;;
 esac
