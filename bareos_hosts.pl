@@ -2,8 +2,9 @@
 
 $bareosDbUser='bareos';
 $bareosDbName='bareos';
+$bareosDbHost='127.0.0.1'
 
-@clients=`/usr/bin/psql -U$bareosDbUser -d$bareosDbName -t -A -c "select name from client;"`;
+@clients=`/usr/bin/psql -h$bareosDbHost -U$bareosDbUser -d$bareosDbName -t -w -A -c "select name from client;"`;
 
 $first = 1;
 print "{\n";
