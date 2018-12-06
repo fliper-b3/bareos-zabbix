@@ -107,4 +107,4 @@ chown bareos:bareos /etc/bareos/messages/Zabbix.conf
 
 ## P.S.
 Создано на основе:
-    https://github.com/germanodlf/bacula-zabbix.git
+    https://github.com/ssv1982/bareos-zabbix
