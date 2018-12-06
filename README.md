@@ -71,6 +71,7 @@ chown bareos:bareos /etc/bareos/messages/Zabbix.conf
 127.0.0.1:*:*:bareos:yourpasswordhere
 ```
 Выставить права 0600
+
 7. Перезаргузить настройки Bareos Director, для этого сделать следующее:
 
   ```
