@@ -2,8 +2,9 @@
 
 $bareosDbUser='bareos';
 $bareosDbName='bareos';
+$bareosDbHost='127.0.0.1'
 
-@jobs=`/usr/bin/psql -U$bareosDbUser -d$bareosDbName -t -A -c "select job.name,client.name from job left join client on job.clientid=client.clientid group by job.name,client.name having client.name='$ARGV[0]';"`;
+@jobs=`/usr/bin/psql -h$bareosDbHost -U$bareosDbUser -d$bareosDbName -t -w -A -c "select job.name,client.name from job left join client on job.clientid=client.clientid group by job.name,client.name having client.name='$ARGV[0]';"`;
 
 $first = 1;
   
