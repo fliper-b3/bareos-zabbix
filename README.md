@@ -1,5 +1,5 @@
 # Zabbix monitoring of Bareos's backup jobs and its processes
-Мониторинг заданий Bareos производится посредством bash скриптов и perl скриптов. Perl скрипты используются в шаблонах Zabbix для низкоуровнего определия клиентов и списка заданий. мониторинг производится по каждому клиенту в разрезе каждого задания по уровням архивирования. Bash скрипты собирают информацию о выполненном задании из Bareos Catalog и передают в Zabbix. Создавалось и тестировалось на Bareos 17.2.4, Zabbix 4.0.1, Postgresql 10.6, в Calculate Linux.
+Мониторинг заданий Bareos производится посредством bash скриптов и perl скриптов. Perl скрипты используются в шаблонах Zabbix для низкоуровнего определия клиентов и списка заданий. мониторинг производится по каждому клиенту в разрезе каждого задания по уровням архивирования. Bash скрипты собирают информацию о выполненном задании из Bareos Catalog и передают в Zabbix. Создавалось и тестировалось на Bareos 17.2.4, Zabbix 4.0.1, Postgresql 10.6, в Centos 7.5 selinux=disable Linux.
 
 ##Основные возможности
 - Низкоуровневое определение клиентов Bareos в Zabbix;
@@ -42,17 +42,13 @@
   chown bareos:bareos /var/spool/bareos/bareos-zabbix.bash
   chmod 700 /var/spool/bareos/bareos-zabbix.bash
   ```
-3. Оредактировать секцию `Messages` в `/etc/bareos/bareos-dir.conf`, добавив следующее:
+3. Создать файл Zabbix.conf в каталоге messages  `/etc/bareos/messages/Zabbix.conf`, следующее:
 
-  ```
-  Messages {
-    ...
-    mailcommand = "/var/spool/bareos/bareos-zabbix.bash %i"
-    mail = 127.0.0.1 = all, !skipped
-    ...
-  }
-  ```
+```
+chown bareos:bareos /etc/bareos/messages/Zabbix.conf
+```
 таким образом после каждого задания будет вызываться bash скрипт в котроый будет передваться ID задания.
+не забудьте активировать скрипт для Job'ы
 
 4. Скопировать из репозитория файлы `bareos.pl` и `bareos_hosts.pl` в папку со скриптами для агента Zabbix, В моем случае это: `/etc/zabbix/scripts/`, и установить права:
 
@@ -69,10 +65,16 @@
   UserParameter=bareos.jobs[*],/usr/bin/perl /etc/zabbix/scripts/bareos.pl $1                                       
   UserParameter=bareos.hosts,/usr/bin/perl /etc/zabbix/scripts/bareos_hosts.pl
   ```
-6. Перезаргузить настройки Bareos Director, для этого сделать следующее:
+  
+6. В домашний каталог для пользователей zabbix и bareos положить файл .pgpass  следующего содержания:
+```
+127.0.0.1:*:*:bareos:yourpasswordhere
+```
+Выставить права 0600
+7. Перезаргузить настройки Bareos Director, для этого сделать следующее:
 
   ```
-    /etc/init.d/bacula-dir restart
+   systemctl restart bareos-dir 
   ```
   или 
   ```
@@ -80,21 +82,21 @@
     reload
     exit
   ```
-7. Перезапустить zabbix-agent:
+8. Перезапустить zabbix-agent:
 
   ```
-  /etc/init.d/zabbix-agentd restart
+  systemctl restart zabbix-agent
   ```
-8. Импортировать в Zabbix шаблоны `bareos-template.xml`.
-9. В Zabbix подключить шаблон *Template Bareos Сlients* к хосту для которого правился конфиг агента.
-10. В Zabbix подключить шаблон *Template Bareos Processes* к хоста для которых нужно мониторить сотояние процессов.
+9. Импортировать в Zabbix шаблоны `bareos-template.xml`.
+10. В Zabbix подключить шаблон *Template Bareos Сlients* к хосту для которого правился конфиг агента.
+11. В Zabbix подключить шаблон *Template Bareos Processes* к хоста для которых нужно мониторить сотояние процессов.
 
 ## Ссылки
 
 - **Bareos**:
   - http://doc.bareos.org/master/html/bareos-manual-main-reference.html
 - **Zabbix**:
-  - https://www.zabbix.com/documentation/2.4/start
+  - https://www.zabbix.com/documentation/4.0/start
 
 
 ## Feedback
