@@ -103,7 +103,7 @@ chown bareos:bareos /etc/bareos/messages/Zabbix.conf
 
 Вопросы, замечания и предложения:
 
-- https://github.com/ssv1982/bacula-zabbix/issues
+- https://github.com/fliper-b3/bareos-zabbix/issues
 
 ## P.S.
 Создано на основе:
